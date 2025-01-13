@@ -120,7 +120,10 @@ int game() {
         
         // Move all the buses
         for(Bus *bus : buses) {
-            bus->move();
+            if (bus->move()) {
+                buses.erase(std::remove(buses.begin(), buses.end(), bus), buses.end());
+                delete bus;
+            }
         }
         // Spawn new buses
         if (random_bus_chance() % 25 == 0) {
