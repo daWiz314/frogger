@@ -123,9 +123,9 @@ int game() {
         }
         // Check if frog is on a bus
         for(Bus *bus : buses) {
-            std::pair<int, int> bus_pos = bus->get_position();
+            std::tuple<int, int, int> bus_pos = bus->get_position();
             std::pair<int, int> frog_pos = frog.get_position();
-            if (bus_pos.first == frog_pos.first && bus_pos.second == frog_pos.second) {
+            if (std::get<1>(bus_pos) == frog_pos.second && std::get<0>(bus_pos) >= frog_pos.first && std::get<2>(bus_pos) <= frog_pos.first) {
                 draw_message("You got hit by a bus!");
                 frog.lose_life();
             }
