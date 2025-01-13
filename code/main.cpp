@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <vector>
 #include <utility>
+#include <cstring>
 
 #include "helpers.h"
 #include "Bus.h"
@@ -26,12 +27,23 @@ int main() {
     init_pair(7, COLOR_BLACK, COLOR_BLACK); // Set up color pair for background
     init_pair(8, COLOR_GREEN, COLOR_GREEN); // Set up color pair for frog
     init_pair(9, COLOR_WHITE, COLOR_BLACK); // Set up color pair for displaying text
+    init_pair(10, COLOR_RED, COLOR_WHITE); // Set up color pair for displaying alert text
 
     // This is the background color so that we can "erase" the bus as it moves
     bkgd(COLOR_PAIR(7)); // Set background color
 
     game();
     return 0;
+}
+
+void draw_message(const char *message) {
+    int x, y;
+    getmaxyx(stdscr, y, x);
+    attron(COLOR_PAIR(10));
+    mvprintw(y/2, x/2 - strlen(message)/2, message);
+    refresh();
+    getch();
+    return;
 }
 
 int game() {
@@ -99,10 +111,12 @@ int game() {
         // Check if frog is at the top
         if (frog.get_position().second == 1) {
             frog.gain_score();
+            draw_message("You gained a point!");
             frog.restart();
         }
         refresh();
     }
+    draw_message("Game Over!");
 
     endwin();
     return 0;
