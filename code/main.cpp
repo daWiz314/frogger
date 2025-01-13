@@ -102,12 +102,13 @@ int game() {
 
     // Main game loop
     while(!gameover) {
-        attron(COLOR_PAIR(9));
+        // Score / lives text
+        attron(colors["White on Black"]);
         mvprintw(0, 0, "Score: %d Lives: %d", frog.get_score(), frog.get_lives());
         timeout(100); // Set timeout so we can move everything still
         int ch = getch(); // Get input
         if (ch == ERR) {
-            frog.gain_move();
+            frog.gain_move(); // This is so that the player doesn't have to press the button enough times to actually move while we wait for everything else
         } else {
             frog.handle_input(ch); // Handle input
         }
