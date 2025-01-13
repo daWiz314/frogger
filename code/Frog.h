@@ -4,6 +4,7 @@
 class Frog {
     int x, y, score, lives;
     int DEFAULT_X, DEFAULT_Y;
+    int wait_time;
 public:
     Frog(int x, int y) : x(x), y(y), score(0), lives(3), DEFAULT_X(x), DEFAULT_Y(y) {
         
@@ -26,11 +27,37 @@ public:
 
     void lose_life() {
         this->lives--;
+        this->restart();
+
+    }
+
+    void gain_move() {
+        this->wait_time += 100;
+    }
+
+    void gain_score() {
+        this->score++;
+    }
+
+    void restart() {
         this->erase_frog();
         this->x = this->DEFAULT_X;
         this->y = this->DEFAULT_Y;
         this->draw_frog();
+    }
 
+    void handle_input(int key) {
+        if (key == 'q') {
+            this->lives = 0;
+        } else {
+            if (this->wait_time >= 750) {
+                this->move(key);
+                this->wait_time = 0;
+            } else {
+                this->wait_time += 100;
+            }
+        }
+        
     }
     
     void move(int key) {
