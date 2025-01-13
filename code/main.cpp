@@ -127,7 +127,8 @@ int game() {
         }
         // Spawn new buses
         if (random_bus_chance() % 25 == 0) {
-            Bus *bus = new Bus(1, random_x(y-1), random_x(1000), x-2);
+            int random_y = random_x(y-1);
+            Bus *bus = new Bus(1, random_y, random_x(1000), x-2);
             buses.push_back(bus);
         }
         // Check if frog is on a bus
