@@ -46,8 +46,8 @@ public:
             }
         }
     }
-    std::pair<int, int> get_position() {
-        return std::make_pair(this->x, this->y);
+    std::tuple<int, int, int> get_position() {
+        return std::make_tuple(this->x, this->y, this->x - this->max_length);
     }
 
     int get_speed() {
