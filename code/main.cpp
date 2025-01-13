@@ -25,6 +25,7 @@ int main() {
     init_pair(6, COLOR_YELLOW, COLOR_YELLOW); // Set up color pair
     init_pair(7, COLOR_BLACK, COLOR_BLACK); // Set up color pair for background
     init_pair(8, COLOR_CYAN, COLOR_CYAN); // Set up color pair for frog
+    init_pair(9, COLOR_WHITE, COLOR_BLACK); // Set up color pair for displaying text
 
     // This is the background color so that we can "erase" the bus as it moves
     bkgd(COLOR_PAIR(7)); // Set background color
@@ -63,10 +64,15 @@ int game() {
 
     // Main game loop
     while(!gameover) {
-        
+        attron(COLOR_PAIR(9));
+        mvprintw(0, 0, "Score: %d Lives: %d", frog.get_score(), frog.get_lives());
         timeout(100); // Set timeout so we can move everything still
         int ch = getch(); // Get input
-        frog.move(ch); // Handle input
+        if (ch == ERR) {
+            frog.gain_move();
+        } else {
+            frog.handle_input(ch); // Handle input
+        }
         
         // Move all the buses
         for(Bus *bus : buses) {
@@ -88,6 +94,12 @@ int game() {
         // Check if frog is out of lives
         if (frog.get_lives() == 0) {
             gameover = true;
+        }
+
+        // Check if frog is at the top
+        if (frog.get_position().second == 1) {
+            frog.gain_score();
+            frog.restart();
         }
         refresh();
     }
