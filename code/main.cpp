@@ -23,6 +23,7 @@ std::map<std::string, int> colors = {
 #include "helpers.h"
 #include "Bus.h"
 #include "Frog.h"
+#include "Board.h"
 
 int game();
 void draw_message(const char *message);
@@ -81,6 +82,10 @@ int game() {
     // Set up border
     box(stdscr, 0, 0);
     refresh();
+
+    // Create board
+    Board board(x-1, y-1);
+    board.determin_board(); // Determine the board roads vs water
     
     // Create buses
     // The buses we are creating will have random starting points, and random speeds
