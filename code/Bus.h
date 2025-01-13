@@ -28,9 +28,11 @@ public:
             return false;
         }
     }
-    void move() {
-        if (this->x >= this->max_x) {
-            return;
+    bool move() { // Bool if true kill it from the vector
+        if (this->x-this->max_length >= this->max_x+1) {
+            this->erase_bus();
+            return true;
+
         } else {
             if (this->wait_time >= this->speed) {
                 if (this->check_next_spot()) {
@@ -45,6 +47,7 @@ public:
                 this->wait_time += 100;
             }
         }
+        return false;
     }
     std::tuple<int, int, int> get_position() {
         return std::make_tuple(this->x, this->y, this->x - this->max_length);
