@@ -2,10 +2,27 @@
 #include <vector>
 #include <utility>
 #include <cstring>
+#include <map>
+#include <string>
+
+// Put this up here so it can be used in the others
+std::map<int, std::string> colors = {
+        {1, "White"},
+        {2, "Magenta"},
+        {3, "Red"},
+        {4, "Cyan"},
+        {5, "Blue"},
+        {6, "Yellow"},
+        {7, "Black"},
+        {8, "Green"},
+        {9, "White on Black"},
+        {10, "Red on White"}
+    };
 
 #include "helpers.h"
 #include "Bus.h"
 #include "Frog.h"
+
 
 
 int game();
