@@ -11,7 +11,7 @@ public:
         this->wait_time = 0;
         this->max_x = max_x;
         // Draw bus
-        attron(colors["Yellow"]);
+        attron(COLOR_PAIR(colors["Yellow"]));
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
@@ -63,7 +63,7 @@ private:
         attron(COLOR_PAIR(7));
     }
     void draw_bus() {
-        attron(colors["Yellow"]);
+        attron(COLOR_PAIR(colors["Yellow"]));
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
