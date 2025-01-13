@@ -6,18 +6,19 @@
 #include <string>
 
 // Put this up here so it can be used in the others
-std::map<int, std::string> colors = {
-        {1, "White"},
-        {2, "Magenta"},
-        {3, "Red"},
-        {4, "Cyan"},
-        {5, "Blue"},
-        {6, "Yellow"},
-        {7, "Black"},
-        {8, "Green"},
-        {9, "White on Black"},
-        {10, "Red on White"}
+std::map<std::string, int> colors = {
+        {"White", 1},
+        {"Magenta", 2},
+        {"Red", 3},
+        {"Cyan", 4},
+        {"Blue", 5},
+        {"Yellow", 6},
+        {"Black", 7},
+        {"Green", 8},
+        {"White on Black", 9},
+        {"Red on White", 10}
     };
+}
 
 #include "helpers.h"
 #include "Bus.h"
