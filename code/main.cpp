@@ -38,13 +38,20 @@ int main() {
 
 void draw_message(const char *message) {
     int x, y;
+    char *enter = "Press enter to continue";
     getmaxyx(stdscr, y, x);
     attron(COLOR_PAIR(10));
     mvprintw(y/2, x/2 - strlen(message)/2, message);
+    mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     refresh();
-    getch();
+    while(true) {
+        if (getch() == '\n') {
+            break;
+        }
+    }
     attron(COLOR_PAIR(7));
     mvprintw(y/2, x/2 - strlen(message)/2, message);
+    mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     return;
 }
 
