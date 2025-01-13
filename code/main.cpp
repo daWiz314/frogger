@@ -43,6 +43,8 @@ void draw_message(const char *message) {
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     refresh();
     getch();
+    attron(COLOR_PAIR(7));
+    mvprintw(y/2, x/2 - strlen(message)/2, message);
     return;
 }
 
@@ -100,6 +102,7 @@ int game() {
             std::pair<int, int> bus_pos = bus->get_position();
             std::pair<int, int> frog_pos = frog.get_position();
             if (bus_pos.first == frog_pos.first && bus_pos.second == frog_pos.second) {
+                draw_message("You got hit by a bus!");
                 frog.lose_life();
             }
         }
