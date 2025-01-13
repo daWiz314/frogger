@@ -1,18 +1,17 @@
 #include <utility>
 
 class Bus {
-    int x, y, wait_time, speed, max_x, color, max_length;
+    int x, y, wait_time, speed, max_x, max_length;
 public:
-    Bus(int x, int y, int speed, int max_x, int color) {
+    Bus(int x, int y, int speed, int max_x) {
         this->max_length = random_bus_length();
         this->x = x + this->max_length;
         this->y = y;
         this->speed = speed;
         this->wait_time = 0;
         this->max_x = max_x;
-        this->color = color;
         // Draw bus
-        attron(COLOR_PAIR(this->color));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
@@ -64,7 +63,7 @@ private:
         attron(COLOR_PAIR(7));
     }
     void draw_bus() {
-        attron(COLOR_PAIR(this->color));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
