@@ -11,12 +11,12 @@ public:
         this->wait_time = 0;
         this->max_x = max_x;
         // Draw bus
-        attron(COLOR_PAIR(colors["Yellow"]));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
         mvprintw(this->y, this->x, "B");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     };
     bool check_next_spot() {
         // Check if the next spot is occupied with another bus
@@ -55,19 +55,19 @@ public:
     }
 private:
     void erase_bus() {
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, " ");
         }
         mvprintw(this->y, this->x, " ");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
     void draw_bus() {
-        attron(COLOR_PAIR(colors["Yellow"]));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
         mvprintw(this->y, this->x, "B");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
 };

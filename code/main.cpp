@@ -7,16 +7,16 @@
 
 // Put this up here so it can be used in the others
 std::map<std::string, int> colors = {
-    {"White", 1},
-    {"Magenta", 2},
-    {"Red", 3},
-    {"Cyan", 4},
-    {"Blue", 5},
-    {"Yellow", 6},
-    {"Black", 7},
-    {"Green", 8},
-    {"White on Black", 9},
-    {"Red on White", 10}
+    {"White", COLOR_PAIR(1)},
+    {"Magenta", COLOR_PAIR(2)},
+    {"Red", COLOR_PAIR(3)},
+    {"Cyan", COLOR_PAIR(4)},
+    {"Blue", COLOR_PAIR(5)},
+    {"Yellow", COLOR_PAIR(6)},
+    {"Black", COLOR_PAIR(7)},
+    {"Green", COLOR_PAIR(8)},
+    {"White on Black", COLOR_PAIR(9)},
+    {"Red on White", COLOR_PAIR(10)}
 };
 
 
@@ -47,7 +47,7 @@ int main() {
     init_pair(10, COLOR_RED, COLOR_WHITE); // Set up color pair for displaying alert text
 
     // This is the background color so that we can "erase" the bus as it moves
-    bkgd(COLOR_PAIR(7)); // Set background color
+    bkgd(colors["Black"]); // Set background color
 
     game();
     return 0;
@@ -57,7 +57,7 @@ void draw_message(const char *message) {
     int x, y;
     char *enter = "Press enter to continue";
     getmaxyx(stdscr, y, x);
-    attron(COLOR_PAIR(colors["Red on White"]));
+    attron(colors["Red on White"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     refresh();
@@ -66,7 +66,7 @@ void draw_message(const char *message) {
             break;
         }
     }
-    attron(COLOR_PAIR(colors["Black"]));
+    attron(colors["White on Black"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     return;
