@@ -57,7 +57,7 @@ void draw_message(const char *message) {
     int x, y;
     char *enter = "Press enter to continue";
     getmaxyx(stdscr, y, x);
-    attron(COLOR_PAIR(10));
+    attron(colors["Red on White"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     refresh();
@@ -66,7 +66,7 @@ void draw_message(const char *message) {
             break;
         }
     }
-    attron(COLOR_PAIR(7));
+    attron(colors["Black"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     return;
