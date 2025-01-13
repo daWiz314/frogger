@@ -7,18 +7,18 @@
 
 // Put this up here so it can be used in the others
 std::map<std::string, int> colors = {
-        {"White", 1},
-        {"Magenta", 2},
-        {"Red", 3},
-        {"Cyan", 4},
-        {"Blue", 5},
-        {"Yellow", 6},
-        {"Black", 7},
-        {"Green", 8},
-        {"White on Black", 9},
-        {"Red on White", 10}
-    };
-}
+    {"White", 1},
+    {"Magenta", 2},
+    {"Red", 3},
+    {"Cyan", 4},
+    {"Blue", 5},
+    {"Yellow", 6},
+    {"Black", 7},
+    {"Green", 8},
+    {"White on Black", 9},
+    {"Red on White", 10}
+};
+
 
 #include "helpers.h"
 #include "Bus.h"
