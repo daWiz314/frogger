@@ -9,7 +9,7 @@ public:
     Frog(int x, int y) : x(x), y(y), score(0), lives(3), DEFAULT_X(x), DEFAULT_Y(y) {
         
         // Draw frog
-        attron(COLOR_PAIR(8));
+        attron(colors["Green"]);
         mvprintw(this->y, this->x, "F");
     }
 
@@ -89,13 +89,13 @@ public:
     }
 private:
     void draw_frog() {
-        attron(COLOR_PAIR(8));
+        attron(colors["Green"]);
         mvprintw(this->y, this->x, "F");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
     void erase_frog() {
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
         mvprintw(this->y, this->x, " ");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
 };
