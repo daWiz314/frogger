@@ -87,7 +87,7 @@ int game() {
     srand(time(nullptr)); // Seed random number generator
     std::vector<Bus *> buses; // Vector to contain buses
     for (int i = 0; i < 10; i++) {
-        Bus *bus = new Bus(1, random_x(y-1), random_x(1000), x-2, random_color());
+        Bus *bus = new Bus(1, random_x(y-1), random_x(1000), x-2);
         buses.push_back(bus);
     }
 
@@ -118,7 +118,7 @@ int game() {
         }
         // Spawn new buses
         if (random_bus_chance() % 25 == 0) {
-            Bus *bus = new Bus(1, random_x(y-1), random_x(1000), x-2, random_color());
+            Bus *bus = new Bus(1, random_x(y-1), random_x(1000), x-2);
             buses.push_back(bus);
         }
         // Check if frog is on a bus
