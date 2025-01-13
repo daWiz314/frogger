@@ -25,6 +25,7 @@ std::map<std::string, int> colors = {
 #include "Frog.h"
 
 int game();
+void draw_message(const char *message);
 
 int main() {
     initscr(); // Start ncurses
