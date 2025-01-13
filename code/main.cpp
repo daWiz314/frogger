@@ -24,8 +24,6 @@ std::map<std::string, int> colors = {
 #include "Bus.h"
 #include "Frog.h"
 
-
-
 int game();
 
 int main() {
