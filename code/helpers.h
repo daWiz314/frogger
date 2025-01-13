@@ -16,7 +16,3 @@ int random_bus_length() {
 int random_bus_chance() {
     return rand() % 100;
 }
-
-int random_color() {
-    return rand() % 7 + 1;
-}
