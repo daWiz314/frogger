@@ -7,22 +7,23 @@
 
 // Put this up here so it can be used in the others
 std::map<std::string, int> colors = {
-    {"White", 1},
-    {"Magenta", 2},
-    {"Red", 3},
-    {"Cyan", 4},
-    {"Blue", 5},
-    {"Yellow", 6},
-    {"Black", 7},
-    {"Green", 8},
-    {"White on Black", 9},
-    {"Red on White", 10}
+    {"White", COLOR_PAIR(1)},
+    {"Magenta", COLOR_PAIR(2)},
+    {"Red", COLOR_PAIR(3)},
+    {"Cyan", COLOR_PAIR(4)},
+    {"Blue", COLOR_PAIR(5)},
+    {"Yellow", COLOR_PAIR(6)},
+    {"Black", COLOR_PAIR(7)},
+    {"Green", COLOR_PAIR(8)},
+    {"White on Black", COLOR_PAIR(9)},
+    {"Red on White", COLOR_PAIR(10)}
 };
 
 
 #include "helpers.h"
 #include "Bus.h"
 #include "Frog.h"
+#include "Board.h"
 
 int game();
 void draw_message(const char *message);
@@ -47,7 +48,7 @@ int main() {
     init_pair(10, COLOR_RED, COLOR_WHITE); // Set up color pair for displaying alert text
 
     // This is the background color so that we can "erase" the bus as it moves
-    bkgd(COLOR_PAIR(7)); // Set background color
+    bkgd(colors["Black"]); // Set background color
 
     game();
     return 0;
@@ -57,7 +58,7 @@ void draw_message(const char *message) {
     int x, y;
     char *enter = "Press enter to continue";
     getmaxyx(stdscr, y, x);
-    attron(COLOR_PAIR(colors["Red on White"]));
+    attron(colors["Red on White"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     refresh();
@@ -66,7 +67,7 @@ void draw_message(const char *message) {
             break;
         }
     }
-    attron(COLOR_PAIR(colors["Black"]));
+    attron(colors["White on Black"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     return;
@@ -81,6 +82,10 @@ int game() {
     // Set up border
     box(stdscr, 0, 0);
     refresh();
+
+    // Create board
+    Board board(x-1, y-1);
+    board.determin_board(); // Determine the board roads vs water
     
     // Create buses
     // The buses we are creating will have random starting points, and random speeds
@@ -102,23 +107,28 @@ int game() {
 
     // Main game loop
     while(!gameover) {
-        attron(COLOR_PAIR(9));
+        // Score / lives text
+        attron(colors["White on Black"]);
         mvprintw(0, 0, "Score: %d Lives: %d", frog.get_score(), frog.get_lives());
         timeout(100); // Set timeout so we can move everything still
         int ch = getch(); // Get input
         if (ch == ERR) {
-            frog.gain_move();
+            frog.gain_move(); // This is so that the player doesn't have to press the button enough times to actually move while we wait for everything else
         } else {
             frog.handle_input(ch); // Handle input
         }
         
         // Move all the buses
         for(Bus *bus : buses) {
-            bus->move();
+            if (bus->move()) {
+                buses.erase(std::remove(buses.begin(), buses.end(), bus), buses.end());
+                delete bus;
+            }
         }
         // Spawn new buses
         if (random_bus_chance() % 25 == 0) {
-            Bus *bus = new Bus(1, random_x(y-2), random_x(1000), x-2);
+            int random_y = random_x(y-1);
+            Bus *bus = new Bus(1, random_y, random_x(1000), x-2);
             buses.push_back(bus);
         }
         // Check if frog is on a bus

@@ -11,12 +11,12 @@ public:
         this->wait_time = 0;
         this->max_x = max_x;
         // Draw bus
-        attron(COLOR_PAIR(colors["Yellow"]));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
         mvprintw(this->y, this->x, "B");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     };
     bool check_next_spot() {
         // Check if the next spot is occupied with another bus
@@ -28,9 +28,11 @@ public:
             return false;
         }
     }
-    void move() {
-        if (this->x >= this->max_x+this->max_length+1) {
-            delete this; // Kill yourself
+    bool move() { // Bool if true kill it from the vector
+        if (this->x-this->max_length >= this->max_x+1) {
+            this->erase_bus();
+            return true;
+
         } else {
             if (this->wait_time >= this->speed) {
                 if (this->check_next_spot()) {
@@ -45,6 +47,7 @@ public:
                 this->wait_time += 100;
             }
         }
+        return false;
     }
     std::tuple<int, int, int> get_position() {
         return std::make_tuple(this->x, this->y, this->x - this->max_length);
@@ -55,19 +58,19 @@ public:
     }
 private:
     void erase_bus() {
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, " ");
         }
         mvprintw(this->y, this->x, " ");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
     void draw_bus() {
-        attron(COLOR_PAIR(colors["Yellow"]));
+        attron(colors["Yellow"]);
         for (int i=0; i<this->max_length; i++) {
             mvprintw(this->y, this->x - i, "B");
         }
         mvprintw(this->y, this->x, "B");
-        attron(COLOR_PAIR(7));
+        attron(colors["Black"]);
     }
 };
