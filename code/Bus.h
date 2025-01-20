@@ -29,8 +29,9 @@ public:
         }
     }
     bool move() { // Bool if true kill it from the vector
+    // Or as I like to call it, kill yourself
         if (this->x-this->max_length >= this->max_x+1) {
-            this->erase_bus();
+            this->erase_bus(); 
             return true;
 
         } else {
