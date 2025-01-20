@@ -29,8 +29,8 @@ public:
         }
     }
     void move() {
-        if (this->x >= this->max_x) {
-            return;
+        if (this->x >= this->max_x+this->max_length+1) {
+            delete this; // Kill yourself
         } else {
             if (this->wait_time >= this->speed) {
                 if (this->check_next_spot()) {
