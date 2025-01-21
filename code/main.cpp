@@ -99,12 +99,7 @@ int game() {
 
     // Create frog
     Frog frog(x/2, y-2);
-    // Debug info here
-    // for (int i = 0; i < buses.size(); i++) {
-    //     std::pair<int, int> pos = buses[i]->get_position();
-    //     mvprintw(5 + i, 10, "Bus %d: %d, %d %d", i, pos.first, pos.second, buses[i]->get_speed());
-    // }
-    // refresh();
+
 
     // Main game loop
     while(!gameover) {
