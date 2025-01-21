@@ -68,7 +68,7 @@ void draw_message(const char *message) {
             break;
         }
     }
-    attron(colors["White on Black"]);
+    attron(colors["Black"]);
     mvprintw(y/2, x/2 - strlen(message)/2, message);
     mvprintw(y/2 + 1, x/2 - strlen(enter)/2, enter);
     return;
