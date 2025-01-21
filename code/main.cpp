@@ -86,7 +86,7 @@ int game() {
 
     // Create board
     Board board(x-1, y-1);
-    board.determin_board(); // Determine the board roads vs water
+    board.determine_board(); // Determine the board roads vs water
     
     // Create buses
     // The buses we are creating will have random starting points, and random speeds
