@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <vector>
+#include <bits/stdc++.h>
 #include <utility>
 #include <cstring>
 #include <map>
@@ -121,7 +122,7 @@ int game() {
         // Move all the buses
         for(Bus *bus : buses) {
             if (bus->move()) {
-                buses.erase(std::remove(buses.begin(), buses.end(), bus), buses.end());
+                buses.erase(std::find(buses.begin(), buses.end(), bus));
                 delete bus;
             }
         }
